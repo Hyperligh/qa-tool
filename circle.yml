@@ -1,0 +1,29 @@
+machine:
+  ruby:
+    version: 1.9.3-p0-falcon
+
+dependencies:
+  pre:
+    - gem install selenium-webdriver
+  post:
+    - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
+    - tar -xzf sc-latest-linux.tar.gz
+
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init
+
+#test:
+#  post:
+#    - ruby qaAuto/selenium_scripts/Ruby_Scripts/Sauce/*.rb
+
+test:
+  post:
+    - ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -f ~/sc_ready:
+        background: true
+        pwd: sc-*-linux
+    # Wait for tunnel to be ready
+    - while [ ! -e ~/sc_ready ]; do sleep 1; done
+    # Run selenium tests
+    - ruby qaAuto/selenium_scripts/Ruby_Scripts/Sauce/local_test.rb

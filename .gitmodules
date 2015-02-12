@@ -1,0 +1,3 @@
+[submodule "qaAuto"]
+	path = qaAuto
+	url = https://github.com/g5search/qaAuto.git

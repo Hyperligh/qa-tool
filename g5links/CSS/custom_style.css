@@ -1,0 +1,19 @@
+.hover_delete {
+	position: relative;
+}
+
+.hover_delete:hover .deleter{
+	display:inline-block;
+
+}
+
+.hover_delete:hover .counter{
+	display:none;
+}
+
+.deleter {
+	display:none;
+	margin-right: 12px;
+	margin-left: 5px;
+
+}
